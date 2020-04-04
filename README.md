@@ -28,5 +28,5 @@ V2和API的域名是共用的，如果证书文件存在，则自动配置并启
 
 升级命令：
 `
-wget --no-check-certificate -O ./upgrade.sh https://raw.githubusercontent.com/misakanetwork2018/v2ray_nginx/master/upgrade.sh;bash upgrade.sh
+wget --no-check-certificate -O ./upgrade.sh https://raw.githubusercontent.com/misakanetwork2018/v2ray_nginx_install/master/upgrade.sh;bash upgrade.sh
 `
