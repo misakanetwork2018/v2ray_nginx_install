@@ -358,7 +358,7 @@ systemctl daemon-reload
 systemctl enable v2ray.service
 systemctl start v2ray.service
 systemctl enable nginx.service
-if [ -f /etc/v2ray/v2ray.crt && -f /etc/v2ray/v2ray.key ]; then
+if [[ -f /etc/v2ray/v2ray.crt &&  -f /etc/v2ray/v2ray.key ]]; then
     systemctl start nginx.service
 fi
 systemctl enable v2ray-proxy.service
