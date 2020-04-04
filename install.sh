@@ -75,7 +75,7 @@ do
             private_key=$OPTARG
             ;;
         ?)  
-            echo "Unkonw argument, skip"
+            #echo "Unkonw argument, skip"
             exit 1
         ;;
     esac
@@ -186,6 +186,7 @@ cat > /etc/v2ray/config.json <<EOF
 }
 EOF
 #Install Nginx
+last_dir=`pwd`
 cd /usr/src
 wget -O ./nginx-1.16.1.tar.gz -c http://nginx.org/download/nginx-1.16.1.tar.gz
 tar zxf nginx-1.16.1.tar.gz
@@ -223,7 +224,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-cd ..
+cd $last_dir
 
 ln -s /usr/local/nginx/sbin/nginx /usr/bin/nginx
 
