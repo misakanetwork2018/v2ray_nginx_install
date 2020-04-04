@@ -193,18 +193,9 @@ tar zxf nginx-1.16.1.tar.gz
 cd nginx-1.16.1
 
 #create group if not exists
-egrep "^$group" /etc/group >& /dev/null
-if [ $? -ne 0 ]
-then
-    groupadd $group
-fi
+groupadd $group
 
-#create user if not exists
-egrep "^$user" /etc/passwd >& /dev/null
-if [ $? -ne 0 ]
-then
-    useradd -g $group $user
-fi
+useradd -g $group $user
 
 chsh $user -s /sbin/nologin
 
