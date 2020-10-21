@@ -31,10 +31,10 @@ function Get_Dist_Name()
 function instdpec()
 {
     if [ "$1" == "CentOS" ] || [ "$1" == "CentOS7" ];then
-        $PM -y install wget curl gcc make pcre pcre-devel zlib zlib-devel openssl openssl-devel
+        $PM -y install wget curl gcc make pcre pcre-devel zlib zlib-devel openssl openssl-devel jq
     elif [ "$1" == "Debian" ] || [ "$1" == "Raspbian" ] || [ "$1" == "Ubuntu" ];then
         $PM update
-        $PM -y install wget curl gcc make libpcre3 libpcre3-dev openssl libssl-dev zlib1g-dev
+        $PM -y install wget curl gcc make libpcre3 libpcre3-dev openssl libssl-dev zlib1g-dev jq
     else
         echo "The shell can be just supported to install v2ray on Centos, Ubuntu and Debian."
         exit 1
@@ -54,7 +54,7 @@ UUID=$(cat /proc/sys/kernel/random/uuid)
 domain=""
 user="www"
 group="www"
-v2ray_proxy_url="https://github.com/misakanetwork2018/v2ray_api/releases/download/v0.1.2/v2ray_proxy"
+v2ray_proxy_url=`curl -s https://api.github.com/repos/misakanetwork2018/v2ray_api/releases/latest | jq -r ".assets[] | select(.name) | .browser_download_url"`
 key=`head -c 500 /dev/urandom | tr -dc a-z0-9A-Z | head -c 32`
 cert="v2ray.crt"
 private_key="v2ray.key"

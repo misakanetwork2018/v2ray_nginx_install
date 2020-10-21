@@ -1,4 +1,6 @@
-# v2ray_install
+# v2ray_nginx_install
+
+V2Ray+WS+TLS+Nginx+V2Ray-API
 
 既然要一键，那就贯彻到底
 

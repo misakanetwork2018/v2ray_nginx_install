@@ -1,5 +1,5 @@
 #!/bin/sh
-v2ray_proxy_url="https://github.com/misakanetwork2018/v2ray_api/releases/download/v0.1.2/v2ray_proxy"
+v2ray_proxy_url=`curl -s https://api.github.com/repos/misakanetwork2018/v2ray_api/releases/latest | jq -r ".assets[] | select(.name) | .browser_download_url"`
 
 echo "upgrade v2ray-proxy only"
 systemctl stop v2ray-proxy
