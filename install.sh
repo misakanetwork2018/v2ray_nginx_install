@@ -50,6 +50,10 @@ root_need() {
 
 root_need
 
+Get_Dist_Name
+echo "Your OS is $DISTRO"
+instdpec $DISTRO
+
 UUID=$(cat /proc/sys/kernel/random/uuid)
 domain=""
 user="www"
@@ -81,10 +85,6 @@ do
     esac
 done
 
-Get_Dist_Name
-echo "Your OS is $DISTRO"
-instdpec $DISTRO
-
 echo "1. Install V2Ray by official shell script"
 bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
 if [ $? -ne 0 ]; then
@@ -92,7 +92,12 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "2. Setting V2Ray to vmess+ws+Caddy"
+echo "2. Setting V2Ray to vmess+ws+Nginx"
+#Need create dir
+mkdir /etc/v2ray
+#Modify V2Ray Service
+sed -i 's#/usr/local/etc/v2ray/config.json#/etc/v2ray/config.json#' /etc/systemd/system/v2ray.service
+sed -i 's#/usr/local/etc/v2ray/config.json#/etc/v2ray/config.json#' /etc/systemd/system/v2ray.service.d/10-donot_touch_single_conf.conf
 #Modify V2Ray Config
 cat > /etc/v2ray/config.json <<EOF
 {
@@ -415,9 +420,11 @@ start api: systemctl start v2ray-proxy
 stop api:  systemctl stop v2ray-proxy
 -----------------------------
 Notice:
-If you haven't copy the cert for v2ray, please start nginx after you put the cert & key to /etc/v2ray folder.
+If you haven't copied the cert for v2ray, please put the cert & key to /etc/v2ray folder:
 /etc/v2ray/v2ray.crt
 /etc/v2ray/v2ray.key
+
+Then start nginx:
 
 systemctl start nginx
 -----------------------------
