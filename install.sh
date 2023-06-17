@@ -211,7 +211,8 @@ chsh $user -s /sbin/nologin
 --with-http_ssl_module \
 --with-http_stub_status_module \
 --with-http_realip_module \
---with-threads
+--with-threads \
+--with-stream
 
 make && make install
 
@@ -319,6 +320,15 @@ http {
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         }
+    }
+}
+
+stream {
+    server {
+       listen 14514; 
+       proxy_connect_timeout 1s;
+       proxy_timeout 3s;
+       proxy_pass 127.0.0.1:443;    
     }
 }
 EOF
