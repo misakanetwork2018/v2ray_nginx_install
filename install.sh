@@ -193,9 +193,9 @@ EOF
 #Install Nginx
 last_dir=`pwd`
 cd /usr/src
-wget -O ./nginx-1.16.1.tar.gz -c http://nginx.org/download/nginx-1.16.1.tar.gz
-tar zxf nginx-1.16.1.tar.gz
-cd nginx-1.16.1
+wget -O ./nginx-1.26.2.tar.gz -c http://nginx.org/download/nginx-1.26.2.tar.gz
+tar zxf nginx-1.26.2.tar.gz
+cd nginx-1.26.2
 
 #create group if not exists
 groupadd $group
